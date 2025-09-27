@@ -13,7 +13,7 @@ const Index = () => {
   const [soilReportUploaded, setSoilReportUploaded] = useState(false);
   const [selectedCrop, setSelectedCrop] = useState<string | null>(null);
 
-  const handleSoilUploadComplete = (file: File) => {
+  const handleSoilUploadComplete = (data: { file: File; farmerData: any }) => {
     setSoilReportUploaded(true);
     // Auto-switch to recommendations tab after upload
     setTimeout(() => {

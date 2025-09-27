@@ -12,9 +12,11 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("upload");
   const [soilReportUploaded, setSoilReportUploaded] = useState(false);
   const [selectedCrop, setSelectedCrop] = useState<string | null>(null);
+  const [uploadedData, setUploadedData] = useState<{ file: File; farmerData: any } | null>(null);
 
   const handleSoilUploadComplete = (data: { file: File; farmerData: any }) => {
     setSoilReportUploaded(true);
+    setUploadedData(data);
     // Auto-switch to recommendations tab after upload
     setTimeout(() => {
       setActiveTab("recommendations");
@@ -79,7 +81,7 @@ const Index = () => {
             </TabsContent>
 
             <TabsContent value="recommendations">
-              <CropRecommendations isVisible={soilReportUploaded} />
+              <CropRecommendations isVisible={soilReportUploaded} uploadedData={uploadedData} />
               {!soilReportUploaded && (
                 <div className="text-center p-8 bg-card rounded-lg shadow-soft">
                   <Home className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
